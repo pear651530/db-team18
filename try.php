@@ -20,7 +20,7 @@
 <body>
 
     <div class="jumbotron text-center" style="margin-bottom:0">
-        <h1>吾愛吾師，但吾更愛電競</h1>
+        <h1>吾愛吾師，但吾更愛電競!!!!</h1>
         <p>study is a work but game is my life</p>
     </div>
     <div class="container" style="margin-top:30px">
