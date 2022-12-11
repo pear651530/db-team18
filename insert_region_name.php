@@ -9,7 +9,7 @@
     $begin_date=$_POST["begin_date"];
     $end_month=$_POST["end_month"];
     $end_date=$_POST["end_date"];
-    $query=("insert into game values(?,?,?,?,?,?,?)");
+    $query=("insert into region_name values(?,?,?,?,?,?,?)");
     $stmt=$db->prepare($query);
     $stmt->execute(array($game_name,$region,$season,$begin_month,
                     $begin_date,$end_month,$end_date));
