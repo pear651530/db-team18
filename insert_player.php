@@ -3,11 +3,11 @@
     include_once "team18_database.php";
 
     $name=$_POST["name"];
-    $team=$_POST["team"];
     $country=$_POST["country"];
-    $query=("insert into game values(?,?,?)");
+    $team=$_POST["team"];
+    $query=("insert into player values(?,?,?)");
     $stmt=$db->prepare($query);
-    $stmt->execute(array($name,$team,$country));
+    $stmt->execute(array($name,$country,$team));
     //header("Location:infrom.php");
 
 ?>
