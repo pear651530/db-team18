@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="container" style="margin-top:30px">
-        <form action="pro.php" method="post">
+        <form action="insert_game.php" method="post">
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-2">遊戲名稱:</div>
