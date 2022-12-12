@@ -92,7 +92,6 @@
                 <div class="col-sm-2">原本的內容: </div>
                 <div class="col-sm-4">
                     <select name="ori_data">
-                        <!--<option value="game_name">跑跑</option>-->
                         <?php
                         header("Content-type:text/html;charset=utf-8");
                         include_once "team18_database.php";
@@ -104,7 +103,7 @@
                         $stmt->execute();
                         $result = $stmt->fetchAll();
                         for ($i = 0; $i < count($result); $i++) {
-                            echo "<option value='game_name'>" . $result[$i]['game_name'] . "</option>";
+                            echo "<option value='" . $result[$i]['game_name'] . "'>" . $result[$i]['game_name'] . "</option>";
                         }
                         ?>
                     </select>
@@ -131,35 +130,20 @@
 
         </form>
         <?php
-        /*header("Content-type:text/html;charset=utf-8");
         include_once "team18_database.php";
         $attributes_name = $_POST["attributes_name"];
-        if ($attributes_name == "game_name") {
-            $query = ("select * from game");
+        $button = $_POST["submit"];
+        if ($button == "更新") {
+            $ori_data = $_POST["ori_data"];
+            $up_data = $_POST["up_data"];
+            if ($attributes_name == "game_name") {
+                //echo ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
+                $query = ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
+            }
+            $stmt = $db->prepare($query);
+            $error = $stmt->execute(array($up_data, $ori_data));
         }
-        $stmt = $db->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        for ($i = 0; $i < count($result); $i++) {
-            echo "<option value='game_name'>" . $result[$i]['game_name'] . "</option>";
-        }*/
 
-        //header("Content-type:text/html;charset=utf-8");
-        //include_once "team18_database.php";
-        $attributes_name = $_POST["attributes_name"];
-        $ori_data = $_POST["ori_data"];
-        $up_data = $_POST["up_data"];
-        if ($attributes_name == "game_name") {
-            //echo ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
-            $query = ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
-        }
-        //echo ($query);
-        $stmt = $db->prepare($query);
-        echo ($query);
-        $error = $stmt->execute(array($up_data, $ori_data));
-        $result = $stmt;
-        $i = 0;
-        //echo ($result);
         ?>
     </div>
 
