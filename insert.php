@@ -15,6 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <?php
     ?>
+    <script>
+        function start() {
+            console.log(localStorage.getItem("a"));
+        }
+        window.addEventListener("load", start, false);
+    </script>
 </head>
 
 <body>
@@ -67,8 +73,8 @@
                 <div class="col-sm-3"></div>
                 <div class="col-sm-2"> 遊戲簡介: </div>
                 <div class="col-sm-4">
-                    <input type="text" placeholder="一款5v5多人線上戰鬥技術型(MOBA)遊戲" name="game_description"
-                        style="border: 2px solid black; background-color: white; width: 300px;">
+                    <textarea placeholder="一款5v5多人線上戰鬥技術型(MOBA)遊戲" name="game_description"
+                        style="border: 2px solid black; background-color: white; width: 300px;"></textarea>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
