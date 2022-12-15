@@ -62,28 +62,6 @@
                         <option value="win_team">勝利隊伍</option>
                     </select>
                     <input type="submit" name="submit" value="確定">
-                    <!--<input type="submit" name="submit" value="確定">
-                    <label for="txtList">
-                        <input type="text" id="txtList" placeholder="選擇資訊" list="name1" size="33" name="table_name">
-                        <datalist id="name1">
-                        <option value="game_name">遊戲名稱</option>
-                        <option value="developer">開發商</option>
-                        <option value="logo圖片連結" name="logo_link"></option>
-                        <option value="遊戲簡介" name="game_description"></option>
-                            <?php
-                            /*header("Content-type:text/html;charset=utf-8");
-                            include_once "team18_database.php";
-                            $query = ("select * from game");
-                            $stmt = $db->prepare($query);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
-                            for ($i = 0; $i < count($result); $i++) {
-                            echo "<option value='" . $result[$i]['game_name'] . "'>";
-                            }*/
-
-                            ?>
-                        </datalist>
-                    </label> -->
                 </div>
                 <div class="col-sm-3"></div>
             </div>
@@ -95,15 +73,28 @@
                         <?php
                         header("Content-type:text/html;charset=utf-8");
                         include_once "team18_database.php";
-                        $attributes_name = $_POST["attributes_name"];
-                        if ($attributes_name == "game_name") {
-                            $query = ("select * from game");
-                        }
-                        $stmt = $db->prepare($query);
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
-                        for ($i = 0; $i < count($result); $i++) {
-                            echo "<option value='" . $result[$i]['game_name'] . "'>" . $result[$i]['game_name'] . "</option>";
+                        $check = $_POST;
+                        if ($check) {
+                            $attributes_name = $_POST["attributes_name"];
+                            if ($attributes_name == "game_name") {
+                                $query = ("select * from game");
+                                $stmt = $db->prepare($query);
+                                $stmt->execute();
+                                $result = $stmt->fetchAll();
+                                for ($i = 0; $i < count($result); $i++) {
+                                    echo "<option value='" . $result[$i]['game_name'] . "'>" . $result[$i]['game_name'] . "</option>";
+                                }
+                            }
+                            if ($attributes_name == "developer") {
+                                $query = ("select * from game");
+                                $stmt = $db->prepare($query);
+                                $stmt->execute();
+                                $result = $stmt->fetchAll();
+                                for ($i = 0; $i < count($result); $i++) {
+                                    echo "<option value='" . $result[$i]['developer'] . "'>" . $result[$i]['developer'] . "</option>";
+                                }
+                            }
+
                         }
                         ?>
                     </select>
@@ -131,19 +122,23 @@
         </form>
         <?php
         include_once "team18_database.php";
-        $attributes_name = $_POST["attributes_name"];
-        $button = $_POST["submit"];
-        if ($button == "更新") {
-            $ori_data = $_POST["ori_data"];
-            $up_data = $_POST["up_data"];
-            if ($attributes_name == "game_name") {
-                //echo ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
-                $query = ("update game set " . $attributes_name . "=? where " . $attributes_name . "=?");
+        $check = $_POST;
+        if ($check) {
+            $button = $_POST["submit"];
+            if ($button == "更新") {
+                $attributes_name = $_POST["attributes_name"];
+                $ori_data = $_POST["ori_data"];
+                $up_data = $_POST["up_data"];
+                if ($attributes_name == "game_name") {
+                    $query = ("update game set game_name=? where game_name=?");
+                }
+                else if($attributes_name == "developer") {
+                    $query = ("update game set developer=? where developer=?");
+                }
+                $stmt = $db->prepare($query);
+                $error = $stmt->execute(array($up_data, $ori_data));
             }
-            $stmt = $db->prepare($query);
-            $error = $stmt->execute(array($up_data, $ori_data));
         }
-
         ?>
     </div>
 
