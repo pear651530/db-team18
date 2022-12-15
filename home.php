@@ -92,6 +92,11 @@
                         <span class="glyphicon glyphicon-refresh"></span> 更新資訊
                     </button>
                 </a>
+                <a href="delete.php">
+                    <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-scissors"></span> 刪除資料
+                    </button>
+                </a>
             </div>
             <div class="col-sm-5"></div>
         </div>
