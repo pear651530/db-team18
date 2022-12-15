@@ -41,12 +41,12 @@
         </div>
     </div>
     <div class="container" style="margin-top:30px">
-        <form action="insert_game.php" method="post">
+        <form action="insert.php" method="post">
             <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-2">遊戲名稱:</div>
                 <div class="col-sm-4">
-                    <input type="text" placeholder="lol" name="game_name"
+                    <input type="text" placeholder="League of Legends" name="game_name"
                         style="border: 2px solid black; background-color: white; width: 300px;">
                 </div>
                 <div class="col-sm-3"></div>
@@ -87,6 +87,21 @@
             </div>
 
         </form>
+        <?php
+        header("Content-type:text/html;charset=utf-8");
+        include_once "team18_database.php";
+        $check = $_POST;
+        if ($check) {
+            $game_name = $_POST["game_name"];
+            $developer = $_POST["developer"];
+            $logo_link = $_POST["logo_link"];
+            $game_description = $_POST["game_description"];
+            $query = ("insert into game values(?,?,?,?)");
+            $stmt = $db->prepare($query);
+            $stmt->execute(array($game_name, $developer, $logo_link, $game_description));
+            //header("Location:infrom.php");
+        }
+        ?>
     </div>
 
 </body>
