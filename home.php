@@ -97,6 +97,11 @@
                     <span class="glyphicon glyphicon-scissors"></span> 刪除資料
                     </button>
                 </a>
+                <a href="show.php">
+                    <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-search"></span> 顯示資料
+                    </button>
+                </a>
             </div>
             <div class="col-sm-5"></div>
         </div>
