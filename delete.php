@@ -50,61 +50,75 @@
                 </div>
                 <div class="col-sm-3"></div>
             </div>
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-2">要刪的內容 </div>
-                <div class="col-sm-4">
-
-                </div>
-                <div class="col-sm-3"></div>
-            </div>
             <?php
             header("Content-type:text/html;charset=utf-8");
             include_once "team18_database.php";
             $check = $_POST;
             if ($check) {
-
+                echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>要刪的內容</div><div class='col-sm-4'></div><div class='col-sm-3'></div></div>";
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
-                    echo "<div class='row'><div class='col-sm-3'></div>";
-                    echo "<div class='col-sm-2'>遊戲名稱:</div>";
-                    echo "<div class='col-sm-4'><input type='text' placeholder='League of Legends' name='game_name'
-                        style='border: 2px solid black; background-color: white; width: 300px;'></div>";
-                    echo "<div class='col-sm-3'></div></div>";
+                    $query = ("select distinct game_name from game");
+                    $stmt = $db->prepare($query);
+                    $stmt->execute();
+                    $result = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>遊戲名稱:</div><div class='col-sm-4'><select name='data'>";
+                    for ($i = 0; $i < count($result); $i++) {
+                        echo "<option value='" . $result[$i]['game_name'] . "'>" . $result[$i]['game_name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 } else if ($table_name == "player") {
-                    echo "<div class='row'><div class='col-sm-3'></div>";
-                    echo "<div class='col-sm-2'>選手名稱:</div>";
-                    echo "<div class='col-sm-4'><input type='text' placeholder='Deft' name='name'
-                        style='border: 2px solid black; background-color: white; width: 300px;'></div>";
-                    echo "<div class='col-sm-3'></div></div>";
+                    $query1 = ("select distinct game_name from player");
+                    $stmt = $db->prepare($query1);
+                    $stmt->execute();
+                    $result1 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>遊戲名稱:</div><div class='col-sm-4'><select name='data1'>";
+                    for ($i = 0; $i < count($result1); $i++) {
+                        echo "<option value='" . $result1[$i]['game_name'] . "'>" . $result1[$i]['game_name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query2 = ("select distinct name from player");
+                    $stmt = $db->prepare($query2);
+                    $stmt->execute();
+                    $result2 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>選手名稱:</div><div class='col-sm-4'><select name='data2'>";
+                    for ($i = 0; $i < count($result2); $i++) {
+                        echo "<option value='" . $result2[$i]['name'] . "'>" . $result2[$i]['name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 } else if ($table_name == "region_name") {
-                    echo "<div class='row'><div class='col-sm-3'></div>";
-                    echo "<div class='col-sm-2'>遊戲名稱:</div>";
-                    echo "<div class='col-sm-4'><input type='text' placeholder='League of Legends' name='game_name'
-                        style='border: 2px solid black; background-color: white; width: 300px;'></div>";
-                    echo "<div class='col-sm-3'></div></div>";
-                    echo "<div class='row'><div class='col-sm-3'></div>";
-                    echo "<div class='col-sm-2'>賽區:</div>";
-                    echo "<div class='col-sm-4'><input type='text' placeholder='LCK' name='region'
-                        style='border: 2px solid black; background-color: white; width: 300px;'></div>";
-                    echo "<div class='col-sm-3'></div></div>";
-                    echo "<div class='row'><div class='col-sm-3'></div>";
-                    echo "<div class='col-sm-2'>季賽:</div>";
-                    echo "<div class='col-sm-4'><input type='text' placeholder='spring' name='season'
-                        style='border: 2px solid black; background-color: white; width: 300px;'></div>";
-                    echo "<div class='col-sm-3'></div></div>";
+                    $query1 = ("select distinct game_name from region_name");
+                    $stmt = $db->prepare($query1);
+                    $stmt->execute();
+                    $result1 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>遊戲名稱:</div><div class='col-sm-4'><select name='data1'>";
+                    for ($i = 0; $i < count($result1); $i++) {
+                        echo "<option value='" . $result1[$i]['game_name'] . "'>" . $result1[$i]['game_name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query2 = ("select distinct region from region_name");
+                    $stmt = $db->prepare($query2);
+                    $stmt->execute();
+                    $result2 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽區:</div><div class='col-sm-4'><select name='data2'>";
+                    for ($i = 0; $i < count($result2); $i++) {
+                        echo "<option value='" . $result2[$i]['region'] . "'>" . $result2[$i]['region'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query3 = ("select distinct season from region_name");
+                    $stmt = $db->prepare($query3);
+                    $stmt->execute();
+                    $result3 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>季賽:</div><div class='col-sm-4'><select name='data3'>";
+                    for ($i = 0; $i < count($result3); $i++) {
+                        echo "<option value='" . $result3[$i]['season'] . "'>" . $result3[$i]['season'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 }
+                echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'><input type='submit' name='submit' value='刪除'>";
+                echo "</div><div class='col-sm-3'></div></div>";
             }
             ?>
-            <div class="row">
-                <div class="col-sm-3"></div>
-                <div class="col-sm-6">
-                    <input type="submit" name="submit" value="刪除">
-
-                </div>
-                <div class="col-sm-3"></div>
-            </div>
-
         </form>
         <?php
         include_once "team18_database.php";
@@ -114,20 +128,20 @@
             if ($button == "刪除") {
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
-                    $data = $_POST["game_name"];
+                    $data = $_POST["data"];
                     $query = ("delete from game where game_name=?");
                     $stmt = $db->prepare($query);
                     $error = $stmt->execute(array($data));
                 } else if ($table_name == "player") {
-                    $data = $_POST["name"];
-                    $query = ("delete from player where name=?");
+                    $data1 = $_POST["data1"];
+                    $data2 = $_POST["data2"];
+                    $query = ("delete from player where game_name=? name=?");
                     $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data));
-                }
-                else if ($table_name == "region_name") {
-                    $data1 = $_POST["game_name"];
-                    $data2 = $_POST["region"];
-                    $data3 = $_POST["season"];
+                    $error = $stmt->execute(array($data1, $data2));
+                } else if ($table_name == "region_name") {
+                    $data1 = $_POST["data1"];
+                    $data2 = $_POST["data2"];
+                    $data3 = $_POST["data3"];
                     $query = ("delete from region_name where game_name=? and region=? and season=?");
                     $stmt = $db->prepare($query);
                     $error = $stmt->execute(array($data1, $data2, $data3));
