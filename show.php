@@ -42,7 +42,8 @@
                     <select name="que">
                         <option value="region">全部遊戲的賽區</option>
                         <option value="contest">全部遊戲的賽程</option>
-                        <option value="team_player">全部遊戲的隊伍及選手資訊</option>
+                        <option value="team">全部遊戲的隊伍資訊</option>
+                        <option value="player">全部遊戲的選手資訊</option>
                     </select>
                     <input type="submit" name="submit" value="查詢">
                 </div>
@@ -79,23 +80,24 @@
                             echo "<td>" . $result[$i]['game_name'] . "</td>";
                             echo "<td>" . $result[$i]['region'] . "</td>";
                             echo "<td>" . $result[$i]['season'] . "</td>";
-                            echo "<td>" . $result[$i]['begin_month']."/". $result[$i]['begin_date']. "</td>";
-                            echo "<td>" . $result[$i]['end_month']."/". $result[$i]['end_date']. "</td>";
+                            echo "<td>" . $result[$i]['begin_month'] . "/" . $result[$i]['begin_date'] . "</td>";
+                            echo "<td>" . $result[$i]['end_month'] . "/" . $result[$i]['end_date'] . "</td>";
                             echo "</tr>";
                         }
                         echo "</table>";
                     } else if ($que == "contest") {
-                    } else if ($que == "team_player") {
+                    } else if ($que == "team") {
                         echo "<table border='1'>";
                         echo "<tr>";
                         echo "<th>遊戲名稱</th>";
-                        echo "<th>賽區</th>";
-                        echo "<th>季賽</th>";
-                        echo "<th>開始日期</th>";
-                        echo "<th>結束日期</th>";
+                        echo "<th>隊伍名稱</th>";
+                        echo "<th>隊伍所在國家</th>";
+                        echo "<th>勝場數</th>";
                         echo "</tr>";
 
-                        $query = ("select * from region_name");
+                        $query = ("SELECT team_info.game_name,team_info.team,team_info.location,win_cnt(team_info.team,team_info.game_name) as cnt
+                        FROM team_info,contest
+                        WHERE team_info.team = contest.win_team and team_info.game_name = contest.game_name");
                         $stmt = $db->prepare($query);
                         $stmt->execute();
                         $result = $stmt->fetchAll();
@@ -103,13 +105,13 @@
                         for ($i = 0; $i < count($result); $i++) {
                             echo "<tr>";
                             echo "<td>" . $result[$i]['game_name'] . "</td>";
-                            echo "<td>" . $result[$i]['region'] . "</td>";
-                            echo "<td>" . $result[$i]['season'] . "</td>";
-                            echo "<td>" . $result[$i]['begin_month']."/". $result[$i]['begin_date']. "</td>";
-                            echo "<td>" . $result[$i]['end_month']."/". $result[$i]['end_date']. "</td>";
+                            echo "<td>" . $result[$i]['team'] . "</td>";
+                            echo "<td>" . $result[$i]['location'] . "</td>";
+                            echo "<td>" . $result[$i]['cnt'] . "</td>";
                             echo "</tr>";
                         }
                         echo "</table>";
+                    } else if ($que == "player") {
                     }
                 }
                 ?>
