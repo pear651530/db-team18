@@ -114,7 +114,96 @@
                         echo "<option value='" . $result3[$i]['season'] . "'>" . $result3[$i]['season'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
+                }else if ($table_name == "contest") {
+                    $query1 = ("select distinct game_name from contest");
+                    $stmt = $db->prepare($query1);
+                    $stmt->execute();
+                    $result1 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>遊戲名稱:</div><div class='col-sm-4'><select name='data1'>";
+                    for ($i = 0; $i < count($result1); $i++) {
+                        echo "<option value='" . $result1[$i]['game_name'] . "'>" . $result1[$i]['game_name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query2 = ("select distinct region from contest");
+                    $stmt = $db->prepare($query2);
+                    $stmt->execute();
+                    $result2 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽區:</div><div class='col-sm-4'><select name='data2'>";
+                    for ($i = 0; $i < count($result2); $i++) {
+                        echo "<option value='" . $result2[$i]['region'] . "'>" . $result2[$i]['region'] . "</option>";
+                    }
+                    
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query3 = ("select distinct month from contest");
+                    $stmt = $db->prepare($query3);
+                    $stmt->execute();
+                    $result3 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>月份:</div><div class='col-sm-4'><select name='data3'>";
+                    for ($i = 0; $i < count($result3); $i++) {
+                        echo "<option value='" . $result3[$i]['month'] . "'>" . $result3[$i]['month'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+
+                    $query4 = ("select distinct date from contest");
+                    $stmt = $db->prepare($query4);
+                    $stmt->execute();
+                    $result4 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>日期:</div><div class='col-sm-4'><select name='data4'>";
+                    for ($i = 0; $i < count($result4); $i++) {
+                        echo "<option value='" . $result4[$i]['date'] . "'>" . $result4[$i]['date'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+
+                    $query5 = ("select distinct time from contest");
+                    $stmt = $db->prepare($query5);
+                    $stmt->execute();
+                    $result5 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>時間:</div><div class='col-sm-4'><select name='data5'>";
+                    for ($i = 0; $i < count($result5); $i++) {
+                        echo "<option value='" . $result5[$i]['time'] . "'>" . $result5[$i]['time'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+
+                    $query6 = ("select distinct team1 from contest");
+                    $stmt = $db->prepare($query6);
+                    $stmt->execute();
+                    $result6 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍1:</div><div class='col-sm-4'><select name='data6'>";
+                    for ($i = 0; $i < count($result6); $i++) {
+                        echo "<option value='" . $result6[$i]['team1'] . "'>" . $result6[$i]['team1'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+
+                    $query7 = ("select distinct team2 from contest");
+                    $stmt = $db->prepare($query7);
+                    $stmt->execute();
+                    $result7 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍2:</div><div class='col-sm-4'><select name='data7'>";
+                    for ($i = 0; $i < count($result7); $i++) {
+                        echo "<option value='" . $result7[$i]['team2'] . "'>" . $result7[$i]['team2'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                } else if ($table_name == "team_info") {
+                    $query1 = ("select distinct team from team_info");
+                    $stmt = $db->prepare($query1);
+                    $stmt->execute();
+                    $result1 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍名稱:</div><div class='col-sm-4'><select name='data1'>";
+                    for ($i = 0; $i < count($result1); $i++) {
+                        echo "<option value='" . $result1[$i]['team'] . "'>" . $result1[$i]['team'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query2 = ("select distinct game_name from team_info");
+                    $stmt = $db->prepare($query2);
+                    $stmt->execute();
+                    $result2 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>遊戲名稱:</div><div class='col-sm-4'><select name='data2'>";
+                    for ($i = 0; $i < count($result2); $i++) {
+                        echo "<option value='" . $result2[$i]['game_name'] . "'>" . $result2[$i]['game_name'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 }
+
                 echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'><input type='submit' name='submit' value='刪除'>";
                 echo "</div><div class='col-sm-3'></div></div>";
             }
@@ -135,7 +224,7 @@
                 } else if ($table_name == "player") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
-                    $query = ("delete from player where game_name=? name=?");
+                    $query = ("delete from player where game_name=? and name=?");
                     $stmt = $db->prepare($query);
                     $error = $stmt->execute(array($data1, $data2));
                 } else if ($table_name == "region_name") {
@@ -145,6 +234,23 @@
                     $query = ("delete from region_name where game_name=? and region=? and season=?");
                     $stmt = $db->prepare($query);
                     $error = $stmt->execute(array($data1, $data2, $data3));
+                } else if ($table_name == "contest") {
+                    $data1 = $_POST["data1"];
+                    $data2 = $_POST["data2"];
+                    $data3 = $_POST["data3"];
+                    $data4 = $_POST["data4"];
+                    $data5 = $_POST["data5"];
+                    $data6 = $_POST["data6"];
+                    $data7 = $_POST["data7"];
+                    $query = ("delete from contest where game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
+                    $stmt = $db->prepare($query);
+                    $error = $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7 ));
+                } else if ($table_name == "team_info") {
+                    $data1 = $_POST["data1"];
+                    $data2 = $_POST["data2"];
+                    $query = ("delete from team_info where team=? and game_name=? ");
+                    $stmt = $db->prepare($query);
+                    $error = $stmt->execute(array($data1, $data2));
                 }
             }
         }
