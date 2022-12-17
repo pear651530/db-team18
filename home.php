@@ -84,7 +84,7 @@
             <div class="col-sm-2">
                 <a href="insert.php">
                     <button type="button" class="btn btn-default btn-sm">
-                        <span class="glyphicon glyphicon-plus-sign"></span> 新增遊戲
+                        <span class="glyphicon glyphicon-plus-sign"></span> 新增資料
                     </button>
                 </a>
                 <a href="update.php">
