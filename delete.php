@@ -184,15 +184,6 @@
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
                 } else if ($table_name == "team_info") {
-                    $query1 = ("select distinct team from team_info");
-                    $stmt = $db->prepare($query1);
-                    $stmt->execute();
-                    $result1 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍名稱:</div><div class='col-sm-4'><select name='data1'>";
-                    for ($i = 0; $i < count($result1); $i++) {
-                        echo "<option value='" . $result1[$i]['team'] . "'>" . $result1[$i]['team'] . "</option>";
-                    }
-                    echo "</select></div><div class='col-sm-3'></div></div>";
                     $query2 = ("select distinct game_name from team_info");
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
@@ -202,8 +193,16 @@
                         echo "<option value='" . $result2[$i]['game_name'] . "'>" . $result2[$i]['game_name'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
+                    $query1 = ("select distinct team from team_info");
+                    $stmt = $db->prepare($query1);
+                    $stmt->execute();
+                    $result1 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍名稱:</div><div class='col-sm-4'><select name='data1'>";
+                    for ($i = 0; $i < count($result1); $i++) {
+                        echo "<option value='" . $result1[$i]['team'] . "'>" . $result1[$i]['team'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 }
-
                 echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'><input type='submit' name='submit' value='刪除'>";
                 echo "</div><div class='col-sm-3'></div></div>";
             }
@@ -224,7 +223,7 @@
                 } else if ($table_name == "player") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
-                    $query = ("delete from player where game_name=? and name=?");
+                    $query = ("delete from player where game_name=? name=?");
                     $stmt = $db->prepare($query);
                     $error = $stmt->execute(array($data1, $data2));
                 } else if ($table_name == "region_name") {
