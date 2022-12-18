@@ -88,6 +88,37 @@
                         }
                         echo "</table>";
                     } else if ($que == "contest") {
+                        echo "<table border='1'>";
+                        echo "<tr>";
+                        echo "<th>遊戲名稱</th>";
+                        echo "<th>賽區</th>";
+                        echo "<th>月份</th>";
+                        echo "<th>日期</th>";
+                        echo "<th>時間</th>";
+                        echo "<th>隊伍1</th>";
+                        echo "<th>隊伍2</th>";
+                        echo "<th>獲勝隊伍</th>";
+                        echo "</tr>";
+
+                        $query = ("SELECT * FROM contest");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+
+                        for ($i = 0; $i < count($result); $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $result[$i]['game_name'] . "</td>";
+                            echo "<td>" . $result[$i]['region'] . "</td>";
+                            echo "<td>" . $result[$i]['month'] . "</td>";
+                            echo "<td>" . $result[$i]['date'] . "</td>";
+                            echo "<td>" . $result[$i]['time'] . "</td>";
+                            echo "<td>" . $result[$i]['team1'] . "</td>";
+                            echo "<td>" . $result[$i]['team2'] . "</td>";
+                            echo "<td>" . $result[$i]['win_team'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+
                     } else if ($que == "team") {
                         echo "<table border='1'>";
                         echo "<tr>";
@@ -139,6 +170,29 @@
                         }
                         echo "</table>";
                     } else if ($que == "player") {
+                        echo "<table border='1'>";
+                        echo "<tr>";
+                        echo "<th>選手</th>";
+                        echo "<th>國家</th>";
+                        echo "<th>隊伍</th>";
+                        echo "<th>遊戲名稱</th>";
+                        echo "</tr>";
+
+                        $query = ("SELECT * FROM player");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+
+                        for ($i = 0; $i < count($result); $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $result[$i]['name'] . "</td>";
+                            echo "<td>" . $result[$i]['country'] . "</td>";
+                            echo "<td>" . $result[$i]['team'] . "</td>";
+                            echo "<td>" . $result[$i]['game_name'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+
                     } else if ($que == "counter_team_cnt") {
                         echo "<table border='1'>";
                         echo "<tr>";
