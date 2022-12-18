@@ -1012,81 +1012,363 @@
                     }
                 } else if ($attributes_name == "logo_link") {
                     $lim = $_POST["lim"];
-                    $query = ("update game set logo_link=? where logo_link=? and game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                    $all = ("select * from game");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['logo_link'] == $ori_data && $all_result[$i]['game_name'] == $lim) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update game set logo_link=? where logo_link=? and game_name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "game_description") {
                     $lim = $_POST["lim"];
-                    $query = ("update game set game_description=? where game_description=? and game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                    $all = ("select * from game");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['game_description'] == $ori_data && $all_result[$i]['game_name'] == $lim) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update game set game_description=? where game_description=? and game_name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "name") {
                     $lim = $_POST["lim"];
-                    $query = ("update player set name=? where name=? and game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                    $all = ("select * from player");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['name'] == $ori_data && $all_result[$i]['game_name'] == $lim) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update player set name=? where name=? and game_name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "country") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
-                    $query = ("update player set country=? where country=? and game_name=? and name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                    $all = ("select * from player");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['country'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['name'] == $lim2) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update player set country=? where country=? and game_name=? and name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "player_team") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
-                    $query = ("update player set team=? where team=? and game_name=? and name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                    $all = ("select * from player");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['name'] == $lim2) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update player set team=? where team=? and game_name=? and name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "region") {
                     $lim = $_POST["lim"];
-                    $query = ("update region_name set region=? where region=? and game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['region'] == $ori_data && $all_result[$i]['game_name'] == $lim) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set region=? where region=? and game_name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
                 } else if ($attributes_name == "season") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
-                    $query = ("update region_name set season=? where season=? and game_name=? and region=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['season'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2) {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set season=? where season=? and game_name=? and region=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "begin_month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
                     $lim3 = $_POST["lim3"];
-                    $query = ("update region_name set begin_month=? where begin_month=? and game_name=? and region=? and season=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['begin_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set begin_month=? where begin_month=? and game_name=? and region=? and season=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "begin_date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
                     $lim3 = $_POST["lim3"];
-                    $query = ("update region_name set begin_date=? where begin_date=? and game_name=? and region=? and season=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['begin_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set begin_date=? where begin_date=? and game_name=? and region=? and season=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "end_month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
                     $lim3 = $_POST["lim3"];
-                    $query = ("update region_name set end_month=? where end_month=? and game_name=? and region=? and season=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['end_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set end_month=? where end_month=? and game_name=? and region=? and season=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "end_date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
                     $lim3 = $_POST["lim3"];
-                    $query = ("update region_name set end_date=? where end_date=? and game_name=? and region=? and season=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                    $all = ("select * from region_name");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['end_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update region_name set end_date=? where end_date=? and game_name=? and region=? and season=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "team") {
                     $lim = $_POST["lim"];
-                    $query = ("update team_info set team=? where team=? and game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                    $all = ("select * from team_info");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update team_info set team=? where team=? and game_name=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "location") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
-                    $query = ("update team_info set location=? where location=? and game_name=? and team=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                    $all = ("select * from team_info");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['location'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['team'] == $lim2)
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update team_info set location=? where location=? and game_name=? and team=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1094,9 +1376,33 @@
                     $lim4 = $_POST["lim4"];
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
-                    $query = ("update contest set month=? where month=? and game_name=? and region=? and date=? and time=? and team1=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['date'] == $lim3&& $all_result[$i]['time'] == $lim4&& $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set month=? where month=? and game_name=? and region=? and date=? and time=? and team1=? and team2=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1104,9 +1410,33 @@
                     $lim4 = $_POST["lim4"];
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
-                    $query = ("update contest set date=? where date=? and game_name=? and region=? and month=? and time=? and team1=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['time'] == $lim4&& $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set date=? where date=? and game_name=? and region=? and month=? and time=? and team1=? and team2=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "time") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1114,9 +1444,33 @@
                     $lim4 = $_POST["lim4"];
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
-                    $query = ("update contest set time=? where time=? and game_name=? and region=? and month=? and date=? and team1=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['time'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set time=? where time=? and game_name=? and region=? and month=? and date=? and team1=? and team2=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "team1") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1124,9 +1478,33 @@
                     $lim4 = $_POST["lim4"];
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
-                    $query = ("update contest set team1=? where team1=? and game_name=? and region=? and month=? and date=? and time=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['team1'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set team1=? where team1=? and game_name=? and region=? and month=? and date=? and time=? and team2=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "team2") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1134,9 +1512,33 @@
                     $lim4 = $_POST["lim4"];
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
-                    $query = ("update contest set team2=? where team2=? and game_name=? and region=? and month=? and date=? and time=? and team1=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['team2'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team1'] == $lim6 )
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set team2=? where team2=? and game_name=? and region=? and month=? and date=? and time=? and team1=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($attributes_name == "win_team") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1145,9 +1547,33 @@
                     $lim5 = $_POST["lim5"];
                     $lim6 = $_POST["lim6"];
                     $lim7 = $_POST["lim7"];
-                    $query = ("update contest set win_team=? where win_team=? and game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6, $lim7));
+                    $all = ("select * from contest");
+                    $stmt = $db->prepare($all);
+                    $stmt->execute();
+                    $all_result = $stmt->fetchAll();
+                    $hold = 0;
+                    for ($i = 0; $i < count($all_result); $i++) {
+                        if ($all_result[$i]['win_team'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team1'] == $lim6 && $all_result[$i]['team2'] == $lim7)
+                         {
+                            $hold = 1;
+                            echo "<script>", 'print2();', '</script>';
+                            $query = ("update contest set win_team=? where win_team=? and game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
+                            $stmt = $db->prepare($query);
+                            $error = $stmt->execute(array($up_data, $ori_data, $lim1, $lim2, $lim3, $lim4, $lim5, $lim6, $lim7));
+                        }
+                    }
+                    if ($hold == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    else{
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 }
             }
         }
