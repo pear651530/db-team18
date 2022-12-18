@@ -43,7 +43,9 @@
                         <option value="region">全部遊戲的賽區</option>
                         <option value="contest">全部遊戲的賽程</option>
                         <option value="team">全部遊戲的隊伍資訊</option>
+                        <option value="team_onlywin">有獲勝的全部遊戲的隊伍資訊</option>
                         <option value="player">全部遊戲的選手資訊</option>
+                        <option value="counter_team_cnt">每個國家有的隊伍數</option>
                     </select>
                     <input type="submit" name="submit" value="查詢">
                 </div>
@@ -95,7 +97,32 @@
                         echo "<th>勝場數</th>";
                         echo "</tr>";
 
-                        $query = ("SELECT team_info.game_name,team_info.team,team_info.location,win_cnt(team_info.team,team_info.game_name) as cnt
+                        $query = ("SELECT game_name, team,location,win_cnt(team,team_info.game_name) as wincnt 
+                        FROM team_info
+                        WHERE 1");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+
+                        for ($i = 0; $i < count($result); $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $result[$i]['game_name'] . "</td>";
+                            echo "<td>" . $result[$i]['team'] . "</td>";
+                            echo "<td>" . $result[$i]['location'] . "</td>";
+                            echo "<td>" . $result[$i]['wincnt'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
+                    } else if ($que == "team_onlywin") {
+                        echo "<table border='1'>";
+                        echo "<tr>";
+                        echo "<th>遊戲名稱</th>";
+                        echo "<th>隊伍名稱</th>";
+                        echo "<th>隊伍所在國家</th>";
+                        echo "<th>勝場數</th>";
+                        echo "</tr>";
+
+                        $query = ("SELECT team_info.game_name, team,location,win_cnt(team,team_info.game_name) as wincnt 
                         FROM team_info,contest
                         WHERE team_info.team = contest.win_team and team_info.game_name = contest.game_name");
                         $stmt = $db->prepare($query);
@@ -107,11 +134,32 @@
                             echo "<td>" . $result[$i]['game_name'] . "</td>";
                             echo "<td>" . $result[$i]['team'] . "</td>";
                             echo "<td>" . $result[$i]['location'] . "</td>";
-                            echo "<td>" . $result[$i]['cnt'] . "</td>";
+                            echo "<td>" . $result[$i]['wincnt'] . "</td>";
                             echo "</tr>";
                         }
                         echo "</table>";
                     } else if ($que == "player") {
+                    } else if ($que == "counter_team_cnt") {
+                        echo "<table border='1'>";
+                        echo "<tr>";
+                        echo "<th>國家</th>";
+                        echo "<th>隊伍數</th>";
+                        echo "</tr>";
+
+                        $query = ("SELECT team_info.location,COUNT(DISTINCT team) as teams
+                        FROM team_info
+                        GROUP BY team_info.location");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
+
+                        for ($i = 0; $i < count($result); $i++) {
+                            echo "<tr>";
+                            echo "<td>" . $result[$i]['location'] . "</td>";
+                            echo "<td>" . $result[$i]['teams'] . "</td>";
+                            echo "</tr>";
+                        }
+                        echo "</table>";
                     }
                 }
                 ?>
