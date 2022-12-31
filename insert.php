@@ -253,9 +253,15 @@
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>勝利隊伍:</div><div class='col-sm-4'>";
-                    echo "<input type='text' placeholder='BYG' name='data8' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-
+                    $query4 = ("select distinct team from team_info");
+                    $stmt = $db->prepare($query3);
+                    $stmt->execute();
+                    $result4 = $stmt->fetchAll();
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>勝利隊伍: </div><div class='col-sm-4'><select name='data8'>";
+                    for ($i = 0; $i < count($result4); $i++) {
+                        echo "<option value='" . $result3[$i]['team'] . "'>" . $result3[$i]['team'] . "</option>";
+                    }
+                    echo "</select></div><div class='col-sm-3'></div></div>";
                 } else if ($table_name == "team_info") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
