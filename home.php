@@ -5,6 +5,7 @@
     <title>首頁</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Pragma" Content="No-cache">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,7 +13,26 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+
+        body {
+            font-family: "cwTeXFangSong";
+            font-size: 25px;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(205, 202, 202);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
         #img1 {
             height: 240px;
             width: 260px;
@@ -72,7 +92,7 @@
             echo "</div>";
             echo "<div class='col-sm-6'>";
             echo "<h2>" . $result[$i]['game_name'] . "</h2>";
-            echo "<h5>" . $result[$i]['developer'] . "</br>" . $result[$i]['game_description'] . "</h5>";
+            echo "<h4>" . $result[$i]['developer'] . "</br>" . $result[$i]['game_description'] . "</h4>";
             echo "</div>";
             echo "</div>";
             echo "<div class='col-sm-1'></div></br>";
@@ -94,12 +114,12 @@
                 </a>
                 <a href="delete.php">
                     <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-scissors"></span> 刪除資料
+                        <span class="glyphicon glyphicon-scissors"></span> 刪除資料
                     </button>
                 </a>
                 <a href="show.php">
                     <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-search"></span> 顯示資料
+                        <span class="glyphicon glyphicon-search"></span> 顯示資料
                     </button>
                 </a>
             </div>
