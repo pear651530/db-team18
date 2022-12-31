@@ -14,11 +14,83 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <?php
-    ?>
-    <script>
-        function start() {
-            console.log(localStorage.getItem("a"));
+    header("Content-type:text/html;charset=utf-8"); ?>
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+
+        body {
+            font-family: "cwTeXFangSong";
+            font-size: 25px;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(205, 202, 202);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
+
+        #fade {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+
+        #err1,
+        #err2 {
+            display: none;
+            position: absolute;
+            top: 200px;
+            left: 20%;
+            width: 60%;
+            height: 150px;
+            padding: 16px;
+            border: 3px solid orange;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bolder;
+            font-size: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function start() {
+        }
+
+        function print1() {
+            $(document).ready(() => {
+                $("#err1").show();
+                $("#fade").show();
+                setTimeout(function () {
+                    $("#err1").hide();
+                    $("#fade").hide();
+                }, 1500);
+            });
+        }
+
+        function print2() {
+            $(document).ready(() => {
+                $("#err2").show();
+                $("#fade").show();
+                setTimeout(function () {
+                    $("#err2").hide();
+                    $("#fade").hide();
+                }, 1500);
+            });
+        }
+
         window.addEventListener("load", start, false);
     </script>
 </head>
@@ -44,9 +116,9 @@
         <form action="insert.php" method="post">
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-2">要新增的資料類型:</div>
+                <div class="col-sm-2">要新增的類型:</div>
                 <div class="col-sm-4">
-                    <select name="table_name">
+                    <select name="table_name" id="table_name">
                         <option value="game">遊戲資訊</option>
                         <option value="player">選手資訊</option>
                         <option value="region_name">賽區資訊</option>
@@ -54,11 +126,13 @@
                         <option value="contest">比賽資訊</option>
                     </select>
                     <input type="submit" name="submit" value="確定">
+                    <script type="text/javascript">
+                        document.getElementById('table_name').value = "<?php echo $_POST['table_name']; ?>";
+                    </script>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
             <?php
-            header("Content-type:text/html;charset=utf-8");
             include_once "team18_database.php";
             $check = $_POST;
             if ($check) {
@@ -95,7 +169,7 @@
                         echo "<option value='" . $result1[$i]['team'] . "'>" . $result1[$i]['team'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
-                }else if ($table_name == "region_name") {
+                } else if ($table_name == "region_name") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
                     $stmt->execute();
@@ -108,24 +182,24 @@
 
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽區:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='LCK' name='data2' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽季:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='spring' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>begin_month:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1' name='data4' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>begin_date:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='21' name='data5' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                
-                    
+
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>end_month:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='4' name='data6' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>end_date:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='21' name='data7' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                   
-                }else if ($table_name == "contest") {
+
+                } else if ($table_name == "contest") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
                     $stmt->execute();
@@ -145,16 +219,16 @@
                         echo "<option value='" . $result1[$i]['region'] . "'>" . $result1[$i]['region'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>month:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>date:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='25' name='data4' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>time:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1600' name='data5' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                     $query2 = ("select distinct team from team_info");
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
@@ -177,8 +251,8 @@
 
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>win_team:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='BYG' name='data8' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                   
-                }else if ($table_name == "team_info") {
+
+                } else if ($table_name == "team_info") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
                     $stmt->execute();
@@ -192,7 +266,7 @@
                     echo "<input type='text' placeholder='T1' name='data2' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>location:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='Korea' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    
+
                 }
                 echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'><input type='submit' name='submit' value='新增'>";
                 echo "</div><div class='col-sm-3'></div></div>";
@@ -211,19 +285,36 @@
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
                     $data4 = $_POST["data4"];
-                    $query = ("insert into game values(?,?,?,?)");
-                    $stmt = $db->prepare($query);
-                    $stmt->execute(array($data1, $data2, $data3, $data4));
+                    try {
+                        $query = ("insert into game values(?,?,?,?)");
+                        $stmt = $db->prepare($query);
+                        $e = $stmt->execute(array($data1, $data2, $data3, $data4));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
                 } else if ($table_name == "player") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
                     $data4 = $_POST["data4"];
-                    $query = ("insert into player values(?,?,?,?)");
+                    try {
+                        $query = ("insert into player values(?,?,?,?)");
                     $stmt = $db->prepare($query);
-                    $stmt->execute(array($data2, $data3, $data4, $data1));
-                }
-                else if ($table_name == "region_name") {
+                        $e = $stmt->execute(array($data2, $data3, $data4, $data1));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                } else if ($table_name == "region_name") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
@@ -233,9 +324,8 @@
                     $data7 = $_POST["data7"];
                     $query = ("insert into region_name values(?,?,?,?,?,?,?)");
                     $stmt = $db->prepare($query);
-                    $stmt->execute(array($data1, $data2, $data3, $data4,$data5, $data6, $data7));
-                }
-                else if ($table_name == "contest") {
+                    $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                } else if ($table_name == "contest") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
@@ -246,9 +336,8 @@
                     $data8 = $_POST["data8"];
                     $query = ("insert into contest values(?,?,?,?,?,?,?,?)");
                     $stmt = $db->prepare($query);
-                    $stmt->execute(array($data1, $data2, $data3, $data4,$data5, $data6, $data7, $data8));
-                }
-                else if ($table_name == "team_info") {
+                    $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7, $data8));
+                } else if ($table_name == "team_info") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
@@ -256,11 +345,18 @@
                     $stmt = $db->prepare($query);
                     $stmt->execute(array($data2, $data3, $data1));
                 }
+
             }
         }
         ?>
     </div>
-
+    <div id="err1">
+        錯誤的新增!
+    </div>
+    <div id="err2">
+        正確的新增!
+    </div>
+    <div id="fade"></div>
 </body>
 
 </html>
