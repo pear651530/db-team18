@@ -13,7 +13,90 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <?php
+    header("Content-type:text/html;charset=utf-8"); ?>
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
 
+        body {
+            font-family: "cwTeXFangSong";
+            font-size: 25px;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(205, 202, 202);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        #fade {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+
+        #err1,
+        #err2 {
+            display: none;
+            position: absolute;
+            top: 200px;
+            left: 20%;
+            width: 60%;
+            height: 150px;
+            padding: 16px;
+            border: 3px solid orange;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bolder;
+            font-size: 40px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function start() {
+        }
+
+        function print1() {
+            $(document).ready(() => {
+                $("#err1").show();
+                $("#fade").show();
+                setTimeout(function () {
+                    $("#err1").hide();
+                    $("#fade").hide();
+                }, 1500);
+            });
+        }
+
+        function print2() {
+            $(document).ready(() => {
+                $("#err2").show();
+                $("#fade").show();
+                setTimeout(function () {
+                    $("#err2").hide();
+                    $("#fade").hide();
+                }, 1500);
+            });
+        }
+
+        window.addEventListener("load", start, false);
+    </script>
 </head>
 
 <body>
@@ -37,9 +120,9 @@
         <form action="delete.php" method="post">
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-2">要刪除的資料類型:</div>
+                <div class="col-sm-2">要刪除的類型:</div>
                 <div class="col-sm-4">
-                    <select name="table_name">
+                    <select name="table_name" id="table_name">
                         <option value="game">遊戲資訊</option>
                         <option value="player">選手資訊</option>
                         <option value="region_name">賽區資訊</option>
@@ -47,11 +130,13 @@
                         <option value="contest">比賽資訊</option>
                     </select>
                     <input type="submit" name="submit" value="確定">
+                    <script type="text/javascript">
+                        document.getElementById('table_name').value = "<?php echo $_POST['table_name']; ?>";
+                    </script>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
             <?php
-            header("Content-type:text/html;charset=utf-8");
             include_once "team18_database.php";
             $check = $_POST;
             if ($check) {
@@ -114,7 +199,7 @@
                         echo "<option value='" . $result3[$i]['season'] . "'>" . $result3[$i]['season'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
-                }else if ($table_name == "contest") {
+                } else if ($table_name == "contest") {
                     $query1 = ("select distinct game_name from contest");
                     $stmt = $db->prepare($query1);
                     $stmt->execute();
@@ -132,7 +217,7 @@
                     for ($i = 0; $i < count($result2); $i++) {
                         echo "<option value='" . $result2[$i]['region'] . "'>" . $result2[$i]['region'] . "</option>";
                     }
-                    
+
                     echo "</select></div><div class='col-sm-3'></div></div>";
                     $query3 = ("select distinct month from contest");
                     $stmt = $db->prepare($query3);
@@ -217,9 +302,18 @@
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
                     $data = $_POST["data"];
-                    $query = ("delete from game where game_name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data));
+                    try {
+                        $query = ("delete from game where game_name=?");
+                        $stmt = $db->prepare($query);
+                        $error = $stmt->execute(array($data));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $error) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
                 } else if ($table_name == "player") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
@@ -243,7 +337,7 @@
                     $data7 = $_POST["data7"];
                     $query = ("delete from contest where game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
                     $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7 ));
+                    $error = $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
                 } else if ($table_name == "team_info") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
@@ -255,7 +349,13 @@
         }
         ?>
     </div>
-
+    <div id="err1">
+        錯誤的刪除!
+    </div>
+    <div id="err2">
+        正確的刪除!
+    </div>
+    <div id="fade"></div>
 </body>
 
 </html>
