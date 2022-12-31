@@ -302,24 +302,33 @@
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
                     $data = $_POST["data"];
-                    try {
-                        $query = ("delete from game where game_name=?");
-                        $stmt = $db->prepare($query);
-                        $error = $stmt->execute(array($data));
-                        echo "<script>", 'print2();', '</script>';
-                        echo "<script type='text/javascript'>";
-                        echo "setTimeout(function(){
-                                    window.location.href = window.location.href;},1500)";
-                        echo "</script>";
-                    } catch (PDOException $error) {
-                        echo "<script>", 'print1();', '</script>';
-                    }
+                    $query = ("delete from game where game_name=?");
+                    $stmt = $db->prepare($query);
+                    $error = $stmt->execute(array($data));
+                    echo "<script>", 'print2();', '</script>';
+                    echo "<script type='text/javascript'>";
+                    echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                    echo "</script>";
                 } else if ($table_name == "player") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
-                    $query = ("delete from player where game_name=? name=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data1, $data2));
+                    $q = ("select * from player where game_name=? and name=?");
+                    $stmt = $db->prepare($q);
+                    $stmt->execute(array($data1, $data2));
+                    $result = $stmt->fetchAll();
+                    if (count($result) == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    } else {
+                        $query = ("delete from player where game_name=? and name=?");
+                        $stmt = $db->prepare($query);
+                        $error = $stmt->execute(array($data1, $data2));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
                 } else if ($table_name == "region_name") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
