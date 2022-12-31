@@ -13,6 +13,26 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+
+        body {
+            font-family: "cwTeXFangSong";
+            font-size: 25px;
+            width: 100%;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(205, 202, 202);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 
 </head>
 
@@ -39,7 +59,7 @@
                 <div class="col-sm-3"></div>
                 <div class="col-sm-2">要顯示哪種表格:</div>
                 <div class="col-sm-4">
-                    <select name="que">
+                    <select name="que" id="que">
                         <option value="region">全部遊戲的賽區</option>
                         <option value="contest">全部遊戲的賽程</option>
                         <option value="team">全部遊戲的隊伍資訊</option>
@@ -48,6 +68,9 @@
                         <option value="counter_team_cnt">每個國家有的隊伍數</option>
                     </select>
                     <input type="submit" name="submit" value="查詢">
+                    <script type="text/javascript">
+                        document.getElementById('que').value = "<?php echo $_POST['que']; ?>";
+                    </script>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
@@ -118,7 +141,6 @@
                             echo "</tr>";
                         }
                         echo "</table>";
-
                     } else if ($que == "team") {
                         echo "<table border='1'>";
                         echo "<tr>";
@@ -192,7 +214,6 @@
                             echo "</tr>";
                         }
                         echo "</table>";
-
                     } else if ($que == "counter_team_cnt") {
                         echo "<table border='1'>";
                         echo "<tr>";
