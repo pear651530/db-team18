@@ -190,17 +190,17 @@
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽季:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='spring' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>begin_month:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>開始月份:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1' name='data4' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>begin_date:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>開始日期:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='21' name='data5' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>end_month:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>結束月份:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='4' name='data6' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>end_date:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>結束日期:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='21' name='data7' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
                 } else if ($table_name == "contest") {
@@ -224,20 +224,20 @@
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>month:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>月份:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>date:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>日期:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='25' name='data4' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>time:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>時間:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='1600' name='data5' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
                     $query2 = ("select distinct team from team_info");
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
                     $result2 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>team1: </div><div class='col-sm-4'><select name='data6'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍1: </div><div class='col-sm-4'><select name='data6'>";
                     for ($i = 0; $i < count($result2); $i++) {
                         echo "<option value='" . $result2[$i]['team'] . "'>" . $result2[$i]['team'] . "</option>";
                     }
@@ -247,13 +247,13 @@
                     $stmt = $db->prepare($query3);
                     $stmt->execute();
                     $result3 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>team2: </div><div class='col-sm-4'><select name='data7'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍2: </div><div class='col-sm-4'><select name='data7'>";
                     for ($i = 0; $i < count($result3); $i++) {
                         echo "<option value='" . $result3[$i]['team'] . "'>" . $result3[$i]['team'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
 
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>win_team:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>勝利隊伍:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='BYG' name='data8' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
                 } else if ($table_name == "team_info") {
@@ -266,9 +266,9 @@
                         echo "<option value='" . $result[$i]['game_name'] . "'>" . $result[$i]['game_name'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>team:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='T1' name='data2' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>location:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍的所在國家:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='Korea' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
                 }
@@ -308,7 +308,7 @@
                     $data4 = $_POST["data4"];
                     try {
                         $query = ("insert into player values(?,?,?,?)");
-                    $stmt = $db->prepare($query);
+                        $stmt = $db->prepare($query);
                         $e = $stmt->execute(array($data2, $data3, $data4, $data1));
                         echo "<script>", 'print2();', '</script>';
                         echo "<script type='text/javascript'>";
@@ -326,9 +326,18 @@
                     $data5 = $_POST["data5"];
                     $data6 = $_POST["data6"];
                     $data7 = $_POST["data7"];
-                    $query = ("insert into region_name values(?,?,?,?,?,?,?)");
-                    $stmt = $db->prepare($query);
-                    $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                    try {
+                        $query = ("insert into region_name values(?,?,?,?,?,?,?)");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
                 } else if ($table_name == "contest") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
@@ -338,16 +347,35 @@
                     $data6 = $_POST["data6"];
                     $data7 = $_POST["data7"];
                     $data8 = $_POST["data8"];
-                    $query = ("insert into contest values(?,?,?,?,?,?,?,?)");
-                    $stmt = $db->prepare($query);
-                    $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7, $data8));
+                    try {
+                        $query = ("insert into contest values(?,?,?,?,?,?,?,?)");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7, $data8));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                    
                 } else if ($table_name == "team_info") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
-                    $query = ("insert into team_info values(?,?,?)");
-                    $stmt = $db->prepare($query);
-                    $stmt->execute(array($data2, $data3, $data1));
+                    try {
+                        $query = ("insert into team_info values(?,?,?)");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute(array($data2, $data3, $data1));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo "<script>", 'print1();', '</script>';
+                    }
                 }
 
             }
