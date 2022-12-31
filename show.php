@@ -57,7 +57,7 @@
         <form action="show.php" method="post">
             <div class="row">
                 <div class="col-sm-3"></div>
-                <div class="col-sm-2">要顯示哪種表格:</div>
+                <div class="col-sm-2">顯示哪種表格:</div>
                 <div class="col-sm-4">
                     <select name="que" id="que">
                         <option value="region">全部遊戲的賽區</option>
