@@ -333,9 +333,23 @@
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
                     $data3 = $_POST["data3"];
-                    $query = ("delete from region_name where game_name=? and region=? and season=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data1, $data2, $data3));
+                    $q = ("select * from region_name where game_name=? and region=? and season=?");
+                    $stmt = $db->prepare($q);
+                    $stmt->execute(array($data1, $data2, $data3));
+                    $result = $stmt->fetchAll();
+                    if (count($result) == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    } else {
+                        $query = ("delete from region_name where game_name=? and region=? and season=?");
+                        $stmt = $db->prepare($query);
+                        $error = $stmt->execute(array($data1, $data2, $data3));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($table_name == "contest") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
@@ -344,15 +358,43 @@
                     $data5 = $_POST["data5"];
                     $data6 = $_POST["data6"];
                     $data7 = $_POST["data7"];
-                    $query = ("delete from contest where game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                    $q = ("select * from contest where game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
+                    $stmt = $db->prepare($q);
+                    $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                    $result = $stmt->fetchAll();
+                    if (count($result) == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    } else {
+                        $query = ("delete from contest where game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
+                        $stmt = $db->prepare($query);
+                        $error = $stmt->execute(array($data1, $data2, $data3, $data4, $data5, $data6, $data7));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 } else if ($table_name == "team_info") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
-                    $query = ("delete from team_info where team=? and game_name=? ");
-                    $stmt = $db->prepare($query);
-                    $error = $stmt->execute(array($data1, $data2));
+                    $q = ("select * from team_info where team=? and game_name=?");
+                    $stmt = $db->prepare($q);
+                    $stmt->execute(array($data1, $data2));
+                    $result = $stmt->fetchAll();
+                    if (count($result) == 0) {
+                        echo "<script>", 'print1();', '</script>';
+                    } else {
+                        $query = ("delete from team_info where team=? and game_name=? ");
+                        $stmt = $db->prepare($query);
+                        $error = $stmt->execute(array($data1, $data2));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                            window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    }
+                    
                 }
             }
         }
