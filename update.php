@@ -1,3 +1,20 @@
+<?php
+header('Content-Type:text/html;charset=utf-8');
+$check = $_POST;
+if ($check) {
+    $button = $_POST["submit"];
+    if ($button == "登出") {
+        session_start();
+        if (isset($_POST['submit'])) {
+            unset($_SESSION['accout']);
+        }
+        if (!isset($_SESSION['accout'])) {
+
+            header("Location: login.php");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -113,6 +130,12 @@
             <div class="col-sm-6">
                 <h1>更新資訊</h1>
             </div>
+            <div class="col-sm-2">
+                <form method='post'>
+                    <input type='submit' name='submit' value='登出' />
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
     </div>
     <div class="container" style="margin-top:30px">
