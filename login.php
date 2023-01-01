@@ -1,10 +1,10 @@
 <?php
 header('Content-Type:text/html;charset=utf-8');
 session_start();
-echo "<form method='post'>
+echo "<div id='submit'><form method='post'>
 <input type='text' name='username' />
 <input type='submit' name='submit' value='登錄' />
-</form>";
+</form></div>";
 if (isset($_POST['submit'])) {
     $_SESSION['accout'] = $_POST['username'];
 }
@@ -48,6 +48,13 @@ if (isset($_SESSION['accout'])) {
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+        }
+
+        #submit{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
