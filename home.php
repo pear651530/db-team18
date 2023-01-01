@@ -1,3 +1,20 @@
+<?php
+header('Content-Type:text/html;charset=utf-8');
+$check = $_POST;
+if ($check) {
+    $button = $_POST["submit"];
+    if ($button == "登出") {
+        session_start();
+        if (isset($_POST['submit'])) {
+            unset($_SESSION['accout']);
+        }
+        if (!isset($_SESSION['accout'])) {
+
+            header("Location: login.php");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -17,6 +34,7 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
 
@@ -38,43 +56,115 @@
             width: 260px;
             background: #aaa;
         }
+
+        #e {
+            font-family: "cwTeXFangSong";
+            font-size: 40px;
+            text-align: center;
+            color: white;
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+        }
+
+        #preloader {
+            /*   這是整個會蓋住畫面的底色色塊  */
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0%;
+            top: 0%;
+            background-color: #fff;
+            z-index: 9999;
+        }
+
+        #status {
+            /*   這是中間loading的gif坐標css,我們盡量讓他畫面置中  */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @media only screen and (max-width: 1200px) {
+            #img1 {
+                height: 120px;
+                width: 130px;
+            }
     </style>
-    <script type="text/javascript">
+    <script>
+        $(window).load(function () {
+            $("#status").delay(4000).fadeOut(1500);
+            $("#preloader").delay(4000).fadeOut(1500);
+        })
 
-        /*function start() {
-            let a, b, c, d;
-            a =<?php echo "'" . $game_name . "'"; ?>;
-            b =<?php echo "'" . $developer . "'"; ?>;
-            c =<?php echo "'" . $logo_link . "'"; ?>;
-            d =<?php echo "'" . $game_description . "'"; ?>;
-            print(a, b, c, d);
+        window.addEventListener("load", readMethod(), false);
+
+        function readMethod() {
+            // jquery的 ajax，使用GET方法
+            $.ajax({
+                url: 'team18_database.php',
+                type: "GET",
+                // 若成功，執行以下...
+                success: function (response) {
+                    if (response == "ERROR") {
+                        console.log('read 失敗');
+                        $("#e").show();
+                    }
+                    else {
+                        console.log('read 成功');
+                    }
+                },
+                // 若失敗，執行以下...
+                error: function () {
+                    console.log("2");
+                    console.log('read 失敗');
+                    print();
+                }
+            });
         }
-
-        function print(game_name, developer, logo_link, game_description) {
-            let game_name_arr = game_name.split('#');
-            let developer_arr = developer.split('#');
-            let logo_link_arr = logo_link.split('#');
-            let game_description_arr = game_description.split('#');
-            document.getElementById("img1").setAttribute("src", logo_link);
-            document.getElementById("text1").innerHTML = game_name;
-            document.getElementById("text2").innerHTML = developer + " " + game_description;
-            localStorage.setItem("a", "b");
-            console.log(localStorage.getItem("a"));
-        }
-
-        window.addEventListener("load", start, false);*/
     </script>
 </head>
 
 <body>
-
+    <div id="preloader">
+        <div id="status"><img
+                src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!bw700" />
+        </div>
+    </div>
+    <div id="e">
+        404 NOT FOUND!
+    </div>
     <div class="jumbotron text-center" style="margin-bottom:0">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-6">
+                <h1>吾愛吾師，但吾更愛電競</h1>
+                <p>study is a work but game is my life</p>
+            </div>
+            <div class="col-sm-2">
+                <form method='post'>
+                    <input type='submit' name='submit' value='登出' />
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+
+    <!--<div class="jumbotron text-center" style="margin-bottom:0">
         <h1>吾愛吾師，但吾更愛電競</h1>
         <p>study is a work but game is my life</p>
-    </div>
+    </div>-->
     <div class="container" style="margin-top:30px">
         <?php
-        header("Content-type:text/html;charset=utf-8");
+        //header("Content-type:text/html;charset=utf-8");
         include_once "team18_database.php";
 
         $query = ("select * from game");
