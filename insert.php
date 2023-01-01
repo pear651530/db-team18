@@ -1,3 +1,20 @@
+<?php
+header('Content-Type:text/html;charset=utf-8');
+$check = $_POST;
+if ($check) {
+    $button = $_POST["submit"];
+    if ($button == "登出") {
+        session_start();
+        if (isset($_POST['submit'])) {
+            unset($_SESSION['accout']);
+        }
+        if (!isset($_SESSION['accout'])) {
+
+            header("Location: login.php");
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -114,6 +131,12 @@
             <div class="col-sm-6">
                 <h1>新增資料</h1>
             </div>
+            <div class="col-sm-2">
+                <form method='post'>
+                    <input type='submit' name='submit' value='登出' />
+                </form>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
     </div>
     <div class="container" style="margin-top:30px">
@@ -274,7 +297,7 @@
                     echo "</select></div><div class='col-sm-3'></div></div>";
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='T1' name='data2' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍的所在國家:</div><div class='col-sm-4'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>隊伍所在國家:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='Korea' name='data3' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
 
                 }
@@ -365,7 +388,7 @@
                     } catch (PDOException $e) {
                         echo "<script>", 'print1();', '</script>';
                     }
-                    
+
                 } else if ($table_name == "team_info") {
                     $data1 = $_POST["data1"];
                     $data2 = $_POST["data2"];
