@@ -321,6 +321,7 @@ if ($check) {
         $check = $_POST;
         if ($check) {
             $button = $_POST["submit"];
+            echo $button;
             if ($button == "刪除") {
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
