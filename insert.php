@@ -225,7 +225,8 @@ if ($check) {
 
                     echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>結束日期:</div><div class='col-sm-4'>";
                     echo "<input type='text' placeholder='21' name='data7' style='border: 2px solid black; background-color: white; width: 300px;'></div><div class='col-sm-3'></div></div>";
-
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'>*月、日請填寫合法數字，不合法的會不予插入</div>";
+                    echo "<div class='col-sm-3'></div></div>";
                 } else if ($table_name == "contest") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
@@ -285,6 +286,8 @@ if ($check) {
                         echo "<option value='" . $result3[$i]['team'] . "'>" . $result3[$i]['team'] . "</option>";
                     }
                     echo "</select></div><div class='col-sm-3'></div></div>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-6'>*月、日、時請填寫合法數字，不合法的會不予插入</div>";
+                    echo "<div class='col-sm-3'></div></div>";
                 } else if ($table_name == "team_info") {
                     $query = ("select distinct game_name from game");
                     $stmt = $db->prepare($query);
@@ -328,6 +331,7 @@ if ($check) {
                                     window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     } catch (PDOException $e) {
+                        echo $e;
                         echo "<script>", 'print1();', '</script>';
                     }
                 } else if ($table_name == "player") {
@@ -345,6 +349,7 @@ if ($check) {
                                     window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     } catch (PDOException $e) {
+                        echo $e;
                         echo "<script>", 'print1();', '</script>';
                     }
                 } else if ($table_name == "region_name") {
@@ -365,6 +370,24 @@ if ($check) {
                                     window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     } catch (PDOException $e) {
+                        echo $e;
+                        echo "<script>", 'print1();', '</script>';
+                    }
+                } else if ($table_name == "team_info") {
+                    $data1 = $_POST["data1"];
+                    $data2 = $_POST["data2"];
+                    $data3 = $_POST["data3"];
+                    try {
+                        $query = ("insert into team_info values(?,?,?)");
+                        $stmt = $db->prepare($query);
+                        $stmt->execute(array($data2, $data3, $data1));
+                        echo "<script>", 'print2();', '</script>';
+                        echo "<script type='text/javascript'>";
+                        echo "setTimeout(function(){
+                                    window.location.href = window.location.href;},1500)";
+                        echo "</script>";
+                    } catch (PDOException $e) {
+                        echo $e;
                         echo "<script>", 'print1();', '</script>';
                     }
                 } else if ($table_name == "contest") {
@@ -386,27 +409,11 @@ if ($check) {
                                     window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     } catch (PDOException $e) {
+                        echo $e;
                         echo "<script>", 'print1();', '</script>';
                     }
 
-                } else if ($table_name == "team_info") {
-                    $data1 = $_POST["data1"];
-                    $data2 = $_POST["data2"];
-                    $data3 = $_POST["data3"];
-                    try {
-                        $query = ("insert into team_info values(?,?,?)");
-                        $stmt = $db->prepare($query);
-                        $stmt->execute(array($data2, $data3, $data1));
-                        echo "<script>", 'print2();', '</script>';
-                        echo "<script type='text/javascript'>";
-                        echo "setTimeout(function(){
-                                    window.location.href = window.location.href;},1500)";
-                        echo "</script>";
-                    } catch (PDOException $e) {
-                        echo "<script>", 'print1();', '</script>';
-                    }
                 }
-
             }
         }
         ?>
