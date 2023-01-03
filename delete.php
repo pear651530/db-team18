@@ -217,7 +217,7 @@ if ($check) {
                     $stmt = $db->prepare($query3);
                     $stmt->execute();
                     $result3 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>季賽:</div><div class='col-sm-4'><select name='data3'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>賽季:</div><div class='col-sm-4'><select name='data3'>";
                     for ($i = 0; $i < count($result3); $i++) {
                         echo "<option value='" . $result3[$i]['season'] . "'>" . $result3[$i]['season'] . "</option>";
                     }
@@ -321,7 +321,6 @@ if ($check) {
         $check = $_POST;
         if ($check) {
             $button = $_POST["submit"];
-            echo $button;
             if ($button == "刪除") {
                 $table_name = $_POST["table_name"];
                 if ($table_name == "game") {
