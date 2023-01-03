@@ -188,7 +188,7 @@ if ($check) {
                             echo "<tr>";
                             echo "<th>遊戲名稱</th>";
                             echo "<th>賽區</th>";
-                            echo "<th>季賽</th>";
+                            echo "<th>賽季</th>";
                             echo "<th>開始日期</th>";
                             echo "<th>結束日期</th>";
                             echo "</tr>";
