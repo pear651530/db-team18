@@ -38,6 +38,7 @@ if ($check) {
     header("Content-type:text/html;charset=utf-8"); ?>
     <style>
         @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+
         body {
             font-family: "cwTeXFangSong";
             font-size: 25px;
@@ -50,7 +51,7 @@ if ($check) {
             background-position: center;
             background-size: cover;
         }
-        
+
         #fade {
             display: none;
             position: absolute;
@@ -65,7 +66,8 @@ if ($check) {
             filter: alpha(opacity=80);
         }
 
-        #err1, #err2 {
+        #err1,
+        #err2 {
             display: none;
             position: absolute;
             top: 200px;
@@ -153,11 +155,11 @@ if ($check) {
                         <option value="country">選手國籍</option>
                         <option value="player_team">選手隊伍名稱</option>
                         <option value="region">賽區</option>
-                        <option value="season">季賽</option>
-                        <option value="begin_month">季賽開始月份</option>
-                        <option value="begin_date">季賽開始日期</option>
-                        <option value="end_month">季賽結束月份</option>
-                        <option value="end_date">季賽結束日期</option>
+                        <option value="season">賽季</option>
+                        <option value="begin_month">賽季開始月份</option>
+                        <option value="begin_date">賽季開始日期</option>
+                        <option value="end_month">賽季結束月份</option>
+                        <option value="end_date">賽季結束日期</option>
                         <option value="team">隊伍名稱</option>
                         <option value="location">隊伍的所在國家</option>
                         <option value="month">比賽月份</option>
@@ -179,7 +181,6 @@ if ($check) {
             include_once "team18_database.php";
             $check = $_POST;
             if ($check) {
-                //echo "";
                 $attributes_name = $_POST["attributes_name"];
                 if ($attributes_name == "game_name") {
                     $query = ("select distinct game_name from game");
@@ -430,7 +431,7 @@ if ($check) {
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
                     $result2 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個季賽: </div><div class='col-sm-4'><select name='lim3'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個賽季: </div><div class='col-sm-4'><select name='lim3'>";
                     for ($i = 0; $i < count($result2); $i++) {
                         echo "<option value='" . $result2[$i]['season'] . "'>" . $result2[$i]['season'] . "</option>";
                     }
@@ -467,7 +468,7 @@ if ($check) {
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
                     $result2 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個季賽: </div><div class='col-sm-4'><select name='lim3'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個賽季: </div><div class='col-sm-4'><select name='lim3'>";
                     for ($i = 0; $i < count($result2); $i++) {
                         echo "<option value='" . $result2[$i]['season'] . "'>" . $result2[$i]['season'] . "</option>";
                     }
@@ -504,7 +505,7 @@ if ($check) {
                     $stmt = $db->prepare($query2);
                     $stmt->execute();
                     $result2 = $stmt->fetchAll();
-                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個季賽: </div><div class='col-sm-4'><select name='lim3'>";
+                    echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>哪個賽季: </div><div class='col-sm-4'><select name='lim3'>";
                     for ($i = 0; $i < count($result2); $i++) {
                         echo "<option value='" . $result2[$i]['season'] . "'>" . $result2[$i]['season'] . "</option>";
                     }
@@ -968,7 +969,7 @@ if ($check) {
             if ($check) {
                 echo "<div class='row'><div class='col-sm-3'></div><div class='col-sm-2'>更新後內容:</div><div class='col-sm-4'>";
                 $attributes_name = $_POST["attributes_name"];
-                if ($attributes_name == "player_team") {
+                if ($attributes_name == "player_team" || $attributes_name == "team1" || $attributes_name == "team2" || $attributes_name == "win_team") {
                     $query = ("select distinct team from team_info");
                     $stmt = $db->prepare($query);
                     $stmt->execute();
@@ -1007,7 +1008,7 @@ if ($check) {
                     echo "setTimeout(function(){
                         window.location.href = window.location.href;},1500)";
                     echo "</script>";
-                    
+
                 } else if ($attributes_name == "developer") {
                     $lim = $_POST["lim"];
                     $all = ("select * from game");
@@ -1026,8 +1027,7 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
@@ -1051,14 +1051,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "game_description") {
                     $lim = $_POST["lim"];
                     $all = ("select * from game");
@@ -1077,14 +1076,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "name") {
                     $lim = $_POST["lim"];
                     $all = ("select * from player");
@@ -1103,14 +1101,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "country") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1120,7 +1117,7 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['country'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['name'] == $lim2) {
+                        if ($all_result[$i]['country'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['name'] == $lim2) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update player set country=? where country=? and game_name=? and name=?");
@@ -1130,14 +1127,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "player_team") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1147,7 +1143,7 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['name'] == $lim2) {
+                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['name'] == $lim2) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update player set team=? where team=? and game_name=? and name=?");
@@ -1157,14 +1153,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "region") {
                     $lim = $_POST["lim"];
                     $all = ("select * from region_name");
@@ -1183,8 +1178,7 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
@@ -1199,7 +1193,7 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['season'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2) {
+                        if ($all_result[$i]['season'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update region_name set season=? where season=? and game_name=? and region=?");
@@ -1209,14 +1203,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "begin_month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1227,9 +1220,10 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['begin_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['season'] == $lim3 )
-                         {
+                        if (
+                            $all_result[$i]['begin_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update region_name set begin_month=? where begin_month=? and game_name=? and region=? and season=?");
@@ -1239,14 +1233,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "begin_date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1257,9 +1250,10 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['begin_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['season'] == $lim3 )
-                         {
+                        if (
+                            $all_result[$i]['begin_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update region_name set begin_date=? where begin_date=? and game_name=? and region=? and season=?");
@@ -1269,14 +1263,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "end_month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1287,9 +1280,10 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['end_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['season'] == $lim3 )
-                         {
+                        if (
+                            $all_result[$i]['end_month'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update region_name set end_month=? where end_month=? and game_name=? and region=? and season=?");
@@ -1299,14 +1293,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "end_date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1317,9 +1310,10 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['end_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['season'] == $lim3 )
-                         {
+                        if (
+                            $all_result[$i]['end_date'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['season'] == $lim3
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update region_name set end_date=? where end_date=? and game_name=? and region=? and season=?");
@@ -1329,14 +1323,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "team") {
                     $lim = $_POST["lim"];
                     $all = ("select * from team_info");
@@ -1345,8 +1338,7 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim )
-                         {
+                        if ($all_result[$i]['team'] == $ori_data && $all_result[$i]['game_name'] == $lim) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update team_info set team=? where team=? and game_name=?");
@@ -1356,14 +1348,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "location") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1373,8 +1364,7 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['location'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['team'] == $lim2)
-                         {
+                        if ($all_result[$i]['location'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['team'] == $lim2) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update team_info set location=? where location=? and game_name=? and team=?");
@@ -1384,14 +1374,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "month") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1405,10 +1394,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['month'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['date'] == $lim3&& $all_result[$i]['time'] == $lim4&& $all_result[$i]['team1'] == $lim5
-                            && $all_result[$i]['team2'] == $lim6 )
-                         {
+                        if (
+                            $all_result[$i]['month'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['date'] == $lim3 && $all_result[$i]['time'] == $lim4 && $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set month=? where month=? and game_name=? and region=? and date=? and time=? and team1=? and team2=?");
@@ -1418,14 +1408,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "date") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1439,10 +1428,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['date'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['time'] == $lim4&& $all_result[$i]['team1'] == $lim5
-                            && $all_result[$i]['team2'] == $lim6 )
-                         {
+                        if (
+                            $all_result[$i]['date'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3 && $all_result[$i]['time'] == $lim4 && $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set date=? where date=? and game_name=? and region=? and month=? and time=? and team1=? and team2=?");
@@ -1452,14 +1442,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "time") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1473,10 +1462,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['time'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['team1'] == $lim5
-                            && $all_result[$i]['team2'] == $lim6 )
-                         {
+                        if (
+                            $all_result[$i]['time'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3 && $all_result[$i]['date'] == $lim4 && $all_result[$i]['team1'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set time=? where time=? and game_name=? and region=? and month=? and date=? and team1=? and team2=?");
@@ -1486,14 +1476,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "team1") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1507,10 +1496,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['team1'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
-                            && $all_result[$i]['team2'] == $lim6 )
-                         {
+                        if (
+                            $all_result[$i]['team1'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3 && $all_result[$i]['date'] == $lim4 && $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team2'] == $lim6
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set team1=? where team1=? and game_name=? and region=? and month=? and date=? and time=? and team2=?");
@@ -1520,14 +1510,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "team2") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1541,10 +1530,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['team2'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
-                            && $all_result[$i]['team1'] == $lim6 )
-                         {
+                        if (
+                            $all_result[$i]['team2'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3 && $all_result[$i]['date'] == $lim4 && $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team1'] == $lim6
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set team2=? where team2=? and game_name=? and region=? and month=? and date=? and time=? and team1=?");
@@ -1554,14 +1544,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 } else if ($attributes_name == "win_team") {
                     $lim1 = $_POST["lim1"];
                     $lim2 = $_POST["lim2"];
@@ -1576,10 +1565,11 @@ if ($check) {
                     $all_result = $stmt->fetchAll();
                     $hold = 0;
                     for ($i = 0; $i < count($all_result); $i++) {
-                        if ($all_result[$i]['win_team'] == $ori_data && $all_result[$i]['game_name'] == $lim1&& $all_result[$i]['region'] == $lim2
-                            && $all_result[$i]['month'] == $lim3&& $all_result[$i]['date'] == $lim4&& $all_result[$i]['time'] == $lim5
-                            && $all_result[$i]['team1'] == $lim6 && $all_result[$i]['team2'] == $lim7)
-                         {
+                        if (
+                            $all_result[$i]['win_team'] == $ori_data && $all_result[$i]['game_name'] == $lim1 && $all_result[$i]['region'] == $lim2
+                            && $all_result[$i]['month'] == $lim3 && $all_result[$i]['date'] == $lim4 && $all_result[$i]['time'] == $lim5
+                            && $all_result[$i]['team1'] == $lim6 && $all_result[$i]['team2'] == $lim7
+                        ) {
                             $hold = 1;
                             echo "<script>", 'print2();', '</script>';
                             $query = ("update contest set win_team=? where win_team=? and game_name=? and region=? and month=? and date=? and time=? and team1=? and team2=?");
@@ -1589,14 +1579,13 @@ if ($check) {
                     }
                     if ($hold == 0) {
                         echo "<script>", 'print1();', '</script>';
-                    }
-                    else{
+                    } else {
                         echo "<script type='text/javascript'>";
                         echo "setTimeout(function(){
                             window.location.href = window.location.href;},1500)";
                         echo "</script>";
                     }
-                    
+
                 }
             }
         }
